@@ -27,6 +27,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 import { ListEvaluationComponent } from './evaluation/list-evaluation/list-evaluation.component';
+import { StudentsComponent } from './students/students.component';
+import { StudentListComponent } from './students/student-list/student-list.component';
+import { StudentEditComponent } from './students/student-edit/student-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +50,10 @@ import { ListEvaluationComponent } from './evaluation/list-evaluation/list-evalu
     EditNoteComponent,
     ClassListComponent,
     UploadFilesComponent,
-    ListEvaluationComponent
+    ListEvaluationComponent,
+    StudentsComponent,
+    StudentListComponent,
+    StudentEditComponent
 
   ],
   imports: [

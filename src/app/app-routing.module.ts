@@ -9,7 +9,7 @@ import { EditClassComponent } from './class/edit-class/edit-class.component';
 import { UploadCvComponent } from './upload-cv/upload-cv.component';
 import { EditEvaluationComponent } from './evaluation/edit-evaluation/edit-evaluation.component';
 import { ListEvaluationComponent } from './evaluation/list-evaluation/list-evaluation.component';
-
+import { StudentEditComponent } from './students/student-edit/student-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'evaluationlist/:id', component: ListEvaluationComponent},
   { path: 'evaluationcreate/:id', component: CreateEvaluationComponent},
   { path: 'evaluation/:id', component: EditEvaluationComponent},
+  { path: 'student/:id', component: StudentEditComponent},
   { path: 'editclass/:id', component: EditClassComponent},
   { path: 'upload', component: UploadCvComponent}
 

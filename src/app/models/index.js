@@ -11,4 +11,5 @@ db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.tutorials = require("./tutorial.model.js")(mongoose,mongoosePaginate);
 db.evaluations = require("./evaluation.model.js")(mongoose,mongoosePaginate);
+db.students = require("./student.model.js")(mongoose,mongoosePaginate);
 module.exports = db;

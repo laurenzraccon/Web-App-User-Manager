@@ -2,7 +2,8 @@ module.exports = (mongoose,mongoosePaginate) => {
   var schema = mongoose.Schema(
     {
       name: String,
-      lastname: String
+      lastname: String,
+      grade : Number
     },
     { timestamps: true }
   );
@@ -14,6 +15,6 @@ module.exports = (mongoose,mongoosePaginate) => {
   });
   schema.plugin(mongoosePaginate);
 
-  const Tutorial = mongoose.model("students", schema);
-  return Tutorial;
+  const Student = mongoose.model("student", schema);
+  return Student;
 };
