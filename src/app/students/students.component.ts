@@ -23,6 +23,7 @@ export class StudentsComponent implements OnInit {
   student = {
     name: '',
     lastname: '',
+    note: '',
     grade: 0
   };
   submitted = false;
@@ -41,6 +42,7 @@ export class StudentsComponent implements OnInit {
     const data = {
       name: this.student.name,
       lastname: this.student.lastname,
+      note: this.student.note,
       grade: this.student.grade
     };
 
@@ -60,13 +62,10 @@ export class StudentsComponent implements OnInit {
     this.student = {
       name: '',
       lastname: '',
+      note: '',
       grade: 0
     };
   }
-
-
-
-   
 
   ngOnInit() {
   }

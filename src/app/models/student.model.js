@@ -3,6 +3,7 @@ module.exports = (mongoose,mongoosePaginate) => {
     {
       name: String,
       lastname: String,
+      note: String,
       grade : Number
     },
     { timestamps: true }

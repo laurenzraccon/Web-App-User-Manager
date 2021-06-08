@@ -1,5 +1,5 @@
 const db = require("../models");
-const Student = db.students;
+const Course = db.courses;
 
 
 //By default, 3 Classes will be fetched from database in page index 0
@@ -10,50 +10,50 @@ const getPagination = (page, size) => {
     return { limit, offset };
   };
 
-// Create and Save a new Student
+// Create and Save a new Course
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.name) {
+    if (!req.body.title) {
       res.status(400).send({ message: "Content can not be empty!"+ req.body.title+ " res " +res.status });
       return;
     }
   
-    // Create a Student
-    const student = new Student({
-      name: req.body.name,
-      lastname: req.body.lastname,
-      note: req.body.note,
-      grade: req.body.grade
+    // Create a Course
+    const course = new Course({
+      title: req.body.title,
+      description: req.body.description,
+      year: req.body.year,
+      published: req.body.published ? req.body.published : false
     });
   
-    // Save Student in the database
-    student
-      .save(student)
+    // Save Course in the database
+    course
+      .save(course)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the Student."
+            err.message || "Some error occurred while creating the Course."
         });
       });
   };
 
-// Retrieve all Students from the database.
+// Retrieve all Courses from the database.
 exports.findAll = (req, res) => {
-    const { page, size, name } = req.query;
-    var condition = name
-      ? { name: { $regex: new RegExp(name), $options: "i" } }
+    const { page, size, title } = req.query;
+    var condition = title
+      ? { title: { $regex: new RegExp(title), $options: "i" } }
       : {};
   
     const { limit, offset } = getPagination(page, size);
   
-    Student.paginate(condition, { offset, limit })
+    Course.paginate(condition, { offset, limit })
       .then((data) => {
         res.send({
           totalItems: data.totalDocs,
-          students: data.docs,
+          courses: data.docs,
           totalPages: data.totalPages,
           currentPage: data.page - 1,
         });
@@ -61,29 +61,29 @@ exports.findAll = (req, res) => {
       .catch((err) => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving students.",
+            err.message || "Some error occurred while retrieving courses.",
         });
       });
   };
 
-// Find a single Student with an id
+// Find a single Course with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Student.findById(id)
+    Course.findById(id)
       .then(data => {
         if (!data)
-          res.status(404).send({ message: "Not found Student with id " + id });
+          res.status(404).send({ message: "Not found Course with id " + id });
         else res.send(data);
       })
       .catch(err => {
         res
           .status(500)
-          .send({ message: "Error retrieving Student with id=" + id });
+          .send({ message: "Error retrieving Course with id=" + id });
       });
   };
 
-// Update a Student by the id in the request
+// Update a Course by the id in the request
 exports.update = (req, res) => {
     if (!req.body) {
       return res.status(400).send({
@@ -93,70 +93,70 @@ exports.update = (req, res) => {
   
     const id = req.params.id;
   
-    Student.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    Course.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
       .then(data => {
         if (!data) {
           res.status(404).send({
-            message: `Cannot update Student with id=${id}. Maybe Student was not found!`
+            message: `Cannot update Course with id=${id}. Maybe Course was not found!`
           });
-        } else res.send({ message: "Student was updated successfully." });
+        } else res.send({ message: "Course was updated successfully." });
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating Student with id=" + id
+          message: "Error updating Course with id=" + id
         });
       });
   };
 
-// Delete a Student with the specified id in the request
+// Delete a Course with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
   
-    Student.findByIdAndRemove(id)
+    Course.findByIdAndRemove(id)
       .then(data => {
         if (!data) {
           res.status(404).send({
-            message: `Cannot delete Student with id=${id}. Maybe Student was not found!`
+            message: `Cannot delete Course with id=${id}. Maybe Course was not found!`
           });
         } else {
           res.send({
-            message: "Student was deleted successfully!"
+            message: "Course was deleted successfully!"
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Student with id=" + id
+          message: "Could not delete Course with id=" + id
         });
       });
   };
 
-// Delete all Students from the database.
+// Delete all Courses from the database.
 exports.deleteAll = (req, res) => {
-    Student.deleteMany({})
+    Course.deleteMany({})
       .then(data => {
         res.send({
-          message: `${data.deletedCount} Students were deleted successfully!`
+          message: `${data.deletedCount} Courses were deleted successfully!`
         });
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while removing all students."
+            err.message || "Some error occurred while removing all courses."
         });
       });
   };
 
-// Find all published Students
+// Find all published Courses
 exports.findAllPublished = (req, res) => {
-    Student.find({ published: true })
+    Course.find({ published: true })
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving students."
+            err.message || "Some error occurred while retrieving courses."
         });
       });
   };

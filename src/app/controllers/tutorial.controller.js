@@ -20,8 +20,10 @@ exports.create = (req, res) => {
   
     // Create a Tutorial
     const tutorial = new Tutorial({
+      id: req.body.id,
       title: req.body.title,
       description: req.body.description,
+      note: req.body.note,
       published: req.body.published ? req.body.published : false
     });
   
@@ -41,9 +43,9 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-    const { page, size, title } = req.query;
-    var condition = title
-      ? { title: { $regex: new RegExp(title), $options: "i" } }
+    const { page, size, id } = req.query;
+    var condition = id
+      ? { id: { $regex: new RegExp(id), $options: "i" } }
       : {};
   
     const { limit, offset } = getPagination(page, size);

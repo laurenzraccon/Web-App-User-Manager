@@ -23,8 +23,28 @@
                 name="lastname"
               />
             </div>
+            <div class="form-group">
+              <label for="note"> Note </label>
+              <input
+                type="text"
+                class="form-control"
+                id="note"
+                [(ngModel)]="currentStudent.note"
+                name="note"
+              />
+            </div>
+            <div class="form-group">
+              <label for="grade"> Grade </label>
+              <input
+                type="number"
+                class="form-control"
+                id="grade"
+                [(ngModel)]="currentStudent.grade"
+                name="grade"
+              />
+            </div>
           </form>
-          <!-- ADD Note -->
+      
              <!-- ADD CV -->
       
           <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
